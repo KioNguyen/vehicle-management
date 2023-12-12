@@ -1,40 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend
 
 ## Getting Started
 
-First, run the development server:
+1. Install all dependencies
+2. Run frontend development server
+3. Run backend development server
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Some Things To Note
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- We've installed axios to help you make http requests
+- We've defined some preset breakpoints in `src/styles/theme.ts`
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Part 1
 
-## Learn More
+1. Create a page with a simple form for adding vehicles into your `vehicles` table
 
-To learn more about Next.js, take a look at the following resources:
+2. Integrate the endpoint you created on the backend to add a vehicle with this form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Add about 5-6 vehicles into your table, you will be using these vehicles for the next part
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Part 2
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a page that will display vehicles from your `vehicles` table
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+2. Feel free to display the vehicles in any way you want, some examples: Cards, Tables, etc
+
+3. Integrate the endpoint you created on the backend to retrieve all the vehicles and display them in the format you have chosen
+
