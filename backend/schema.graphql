@@ -1,0 +1,42 @@
+type Vechicle {
+  id:String!
+  name:String!
+  brand: VechicleEnumType!
+  description:String
+  bodyType: VehicleBodyEnumType!
+  fuelType: VehicleFuelEnumType!
+  price: Int
+}
+
+enum VechicleEnumType {
+  Mercedes_Benz
+  BMW
+  Volkswagen
+  Audi
+  Honda
+  Toyota
+}
+
+enum VehicleBodyEnumType {
+  SUV
+  Sedan
+  Hatchback
+  Coupe
+  Convertible
+}
+
+enum VehicleFuelEnumType {
+  Petrol
+  Diesel
+  Hybrid
+  Electric
+}
+
+type Query {
+  vechicles(limit:Int,offset:Int): [Vechicle]
+}
+
+
+type Mutation {
+    addVechicle: String
+}
