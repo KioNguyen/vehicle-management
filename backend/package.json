@@ -2,14 +2,20 @@
   "name": "typeorm-sample",
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
-  "type": "commonjs",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "watch": "nodemon"
+  },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/node": "^16.11.10",
     "ts-node": "10.7.0",
     "typescript": "4.5.2"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.4",
@@ -18,11 +24,11 @@
     "pg": "^8.4.0",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^1.1.1",
-    "typeorm": "0.3.17"
-  },
-  "scripts": {
-    "start": "ts-node src/index.ts",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "watch": "nodemon"
+    "typeorm": "0.3.17",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "8.38.0",
+    "eslint-config-next": "13.3.0",
+    "eslint-config-prettier": "^8.8.0"
   }
 }
