@@ -2,18 +2,25 @@
    "compilerOptions": {
       "lib": [
          "es5",
-         "es6"
+         "es6",
+         "es2020"
       ],
-      "target": "es5",
-      "module": "commonjs",
+      "target": "es2020",
+      "module": "esnext",
       "moduleResolution": "node",
       "outDir": "./build",
+      "esModuleInterop": true,
       "emitDecoratorMetadata": true,
       "experimentalDecorators": true,
       "sourceMap": true,
       "allowSyntheticDefaultImports": true,
       "forceConsistentCasingInFileNames": false  /* Disallow inconsistently-cased references to the same file. */
    },
+   "ts-node": {
+      "compilerOptions": {
+        "module": "commonjs",
+      }
+    },
    "include": [
       "src/**/*"
     ],
@@ -22,3 +29,5 @@
       "dist"
     ]
 } 
+
+
