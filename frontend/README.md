@@ -35,3 +35,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 3. Integrate the endpoint you created on the backend to retrieve all the vehicles and display them in the format you have chosen
 
+4. Your UI should allow for filtering based on the filters you have setup on the backend
+
