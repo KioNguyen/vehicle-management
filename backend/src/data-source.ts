@@ -1,16 +1,29 @@
 import "reflect-metadata";
+import './config';
 import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
-  type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "test", // Replace with your credentials
-  password: "test", // Replace with your credentials
-  database: "test", // Replace with your credentials
-  synchronize: true,
-  logging: false,
-  entities: [],
-  migrations: [],
-  subscribers: [],
+   type: "postgres",
+   host: process.env.DB_HOST || "localhost",
+   port: 5432,
+   username: process.env.DB_USER,
+   password: process.env.DB_PASSWORD,
+   database: process.env.DB_NAME,
+   synchronize: true,
+   logging: false,
+   entities: [
+      "src/entity/**/*.ts"
+   ],
+   migrations: [
+      "src/migration/**/*.ts"
+   ],
+   subscribers: [
+      "src/subscriber/**/*.ts"
+   ]
 });
+
+/* 
+   username: "root",
+   password: "root",
+   database: "vincar",
+   */

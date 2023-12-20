@@ -1,12 +1,16 @@
-import { AppDataSource } from "./data-source";
+import './config';
 import * as express from "express";
 
-AppDataSource.initialize()
-.then(async () => {
-  const app = express();
+const app = express();
+app.listen(process.env.PORT || 8080, async () => {
+  console.log(`Server listening on port ${8080}`);
+});
 
-  app.listen(8080, () => {
-    console.log(`Server listening on port ${8080}`);
-  });
-})
-.catch((error) => console.log(error));
+//error handling middleware
+app.use(function (err, req, res, next) {
+  console.log("hi");
+  res.status(500).send('Something broke!');
+});
+
+
+
