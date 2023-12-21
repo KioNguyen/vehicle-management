@@ -16,6 +16,7 @@ This is the take home test that we use to let you showcase your full stack skill
 - Backend
   - Mutation
     - add vehicle
+    - update vehicle
   - Query
     - get all vehicles
   - Custom Error handling example
