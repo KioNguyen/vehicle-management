@@ -1,14 +1,14 @@
-type Vechicle {
+type Vehicle {
   id:String!
   name:String!
-  brand: VechicleEnumType!
+  brand: VehicleEnumType!
   description:String
   bodyType: VehicleBodyEnumType!
   fuelType: VehicleFuelEnumType!
   price: Int
 }
 
-enum VechicleEnumType {
+enum VehicleEnumType {
   Mercedes_Benz
   BMW
   Volkswagen
@@ -33,10 +33,10 @@ enum VehicleFuelEnumType {
 }
 
 type Query {
-  vechicles(limit:Int,offset:Int): [Vechicle]
+  vehicles(limit:Int,offset:Int): [Vehicle]
 }
 
-
 type Mutation {
-    addVechicle: String
+    addVehicle(name:String!,brand:VehicleEnumType!,description:String,bodyType:VehicleBodyEnumType!,fuelType:VehicleFuelEnumType!,price:Int): String
+    updateVehicle(id:String!,name:String!,brand:VehicleEnumType!,description:String,bodyType:VehicleBodyEnumType!,fuelType:VehicleFuelEnumType!,price:Int): String
 }

@@ -1,8 +1,9 @@
-import { Entity, Unique, PrimaryGeneratedColumn, Column } from "typeorm";
-import { VehicleBodyEnumType, VehicleFuelEnumType, VehicleMakeEnum } from "../interface/vechicle";
+import { Entity, Unique, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { VehicleBodyEnumType, VehicleFuelEnumType, VehicleMakeEnum } from "../interface/vehicle";
+import { BeforeInsert, BeforeUpdate } from "typeorm";
 
-@Entity("vechicles")
-export class Vechicle {
+@Entity("vehicles")
+export class Vehicle {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
@@ -23,4 +24,13 @@ export class Vechicle {
 
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
     price: number;
+
+    @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", })
+    createdAt: Date;
+
+    @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+    updatedAt: Date;
+
+    @DeleteDateColumn({ type: "timestamp", default: null, nullable: true })
+    deletedAt: Date;
 }

@@ -6,8 +6,10 @@ import cors from 'cors';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { schema } from './schema';
 import { AppDataSource } from './data-source';
+
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -17,8 +19,8 @@ const httpServer = http.createServer(app);
 const server = new ApolloServer({
   schema: schema,
   introspection: true,
-  plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-
+  plugins: [ApolloServerPluginDrainHttpServer({ httpServer }),
+  ApolloServerPluginLandingPageLocalDefault({ footer: false })], //enforce display sandbox even if env=production, for dev purposes
 });
 
 AppDataSource.initialize().then(async () => {

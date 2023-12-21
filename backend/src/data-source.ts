@@ -21,9 +21,3 @@ export const AppDataSource = new DataSource({
       "src/subscriber/**/*.{ts,js}"
    ]
 });
-
-/* 
-   username: "root",
-   password: "root",
-   database: "vincar",
-   */
