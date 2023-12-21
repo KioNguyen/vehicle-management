@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation, gql } from '@apollo/client';
+import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 import { useFormik } from 'formik';
 import { useDisclosure, useToast } from '@chakra-ui/react';
 import { object, string, number } from 'yup';
 import { GET_VEHICLES } from '@/graphql/queries/vehicle';
 import { ADD_VEHICLE } from '@/graphql/mutations/vehicle';
-import styles from '.index.module.css';
 
 export const useMainPage = (LIMIT: number) => {
   const [currentPage, setCurrentPage] = useState(1);
