@@ -1,16 +1,17 @@
 import { readFileSync } from "fs";
-import { vechicles } from "./query/vechicle";
+import { vehicles } from "./query/vehicle";
 import { makeExecutableSchema } from '@graphql-tools/schema';
-import { addVechicle } from "./mutation/vechicle";
+import { addVehicle, updateVehicle } from "./mutation/vehicle";
 
 const typeDefs = readFileSync('./schema.graphql', { encoding: 'utf-8' });
 
 const resolvers = {
     Query: {
-        vechicles,
+        vehicles,
     },
     Mutation: {
-        addVechicle,
+        addVehicle,
+        updateVehicle
     }
 };
 
