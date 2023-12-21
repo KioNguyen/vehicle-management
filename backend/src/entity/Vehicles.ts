@@ -13,7 +13,7 @@ export class Vehicle {
     @Column({ type: 'enum', enum: VehicleMakeEnum, })
     brand: VehicleMakeEnum;
 
-    @Column({ unique: true, nullable: true })
+    @Column({ nullable: true })
     description: string;
 
     @Column({ type: 'enum', enum: VehicleBodyEnumType })

@@ -7,6 +7,11 @@ type Vehicle {
   fuelType: VehicleFuelEnumType!
   price: Int
 }
+type GetVehicles {
+  vehicles: [Vehicle]
+  totalCounts: Int
+}
+
 
 enum VehicleEnumType {
   Mercedes_Benz
@@ -33,7 +38,7 @@ enum VehicleFuelEnumType {
 }
 
 type Query {
-  vehicles(limit:Int,offset:Int): [Vehicle]
+  getVehicles(limit:Int,offset:Int): GetVehicles
 }
 
 type Mutation {

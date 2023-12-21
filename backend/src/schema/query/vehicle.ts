@@ -11,7 +11,7 @@ export const VehicleDefs = gql`
 
 
 
-export async function vehicles(_, { limit, offset }, contextValue): Promise<Vehicle[]> {
+export async function getVehicles(_, { limit, offset }, contextValue): Promise<{ totalCounts: number, vehicles: Vehicle[] }> {
     return await VehicleService.getAllVehicles(limit, offset);
 }
 

@@ -4,10 +4,11 @@ import { responseError } from "../utils/validation";
 import { GraphQLError } from 'graphql/error';
 import { ApolloServerErrorCode } from '@apollo/server/errors';
 
-const getAllVehicles = async (limit = 4, offset = 1): Promise<any> => {
+const getAllVehicles = async (limit = 4, offset = 0): Promise<any> => {
     const vehicles: Vehicle[] = await AppDataSource.getRepository(Vehicle)
-        .createQueryBuilder("vehicle").skip(offset).take(limit).getMany();
-    return vehicles || [];
+        .createQueryBuilder("vehicle").skip(offset).take(limit).orderBy('name', 'ASC').getMany();
+    const counts: number = await AppDataSource.manager.count(Vehicle);
+    return { vehicles, totalCounts: counts } || [];
 };
 
 const addVehicle = async (fields): Promise<any> => {
