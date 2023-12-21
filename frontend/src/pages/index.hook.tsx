@@ -44,7 +44,7 @@ export const useMainPage = (LIMIT: number) => {
       fuelType: string().required('At Least 1 selection is required'),
     }),
     onSubmit: async (values, { setSubmitting }) => {
-      const values_ = { ...values, price: values && 0 };
+      const values_ = { ...values, price: values.price || 0 };
       const { errors } = await addVehicle({ variables: values_ });
       if (errors)
         toast({
