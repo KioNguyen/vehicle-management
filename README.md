@@ -4,23 +4,6 @@ Hello!
 
 This is the take home test that we use to let you showcase your full stack skills. This README will provide some helpful links for you to use as you build out your solution as well as general guidance on what we are looking for.
 
-### Mock data display
-![Demo GIF](./showcase/vehicle_table_records.gif)
-
-### Vehicle listing page
-![Demo GIF](./showcase/show_listing_with_pagination.gif)
-
-### Add Existing Vehicle
-![Demo GIF](./showcase/submit_existing_vehicle.gif)
-
-### Add New Vehicle, fetch live updated records
-![Demo GIF](./showcase/add_vehicle_validation_and_fetch_new_update.gif)
-
-### Validation
-![Demo GIF](./showcase/form_validation_and_success_submission.gif)
-
-
-
 ### Terminology and Technical aspect showcase
 - Frontend
   - React custom hooks
@@ -37,8 +20,21 @@ This is the take home test that we use to let you showcase your full stack skill
     - get all vehicles
   - Custom Error handling example
     - bad user input -> entity already exist
-   
 
+### Mock data display
+![Demo GIF](./showcase/vehicle_table_records.gif)
+
+### Vehicle listing page
+![Demo GIF](./showcase/show_listing_with_pagination.gif)
+
+### Add Existing Vehicle
+![Demo GIF](./showcase/submit_existing_vehicle.gif)
+
+### Add New Vehicle, fetch live updated records
+![Demo GIF](./showcase/add_vehicle_validation_and_fetch_new_update.gif)
+
+### Validation
+![Demo GIF](./showcase/form_validation_and_success_submission.gif)
 
 ## Getting Started (pre-requisite)
 In backend directory, create .env file from .env.example and run docker compose up to setup local db.
