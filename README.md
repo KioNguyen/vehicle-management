@@ -6,8 +6,11 @@ This is the take home test that we use to let you showcase your full stack skill
 
 ## Getting Started
 
-1. First thing you should do is fork interview-take-home repo. Once forked you can commit and push your changes into the forked version of the repo.
-2. Read through the READMEs in both the frontend and backend folders.
+```bash
+cp .env.example .env
+docker-compose up -d
+yarn watch
+```
 
 ## Running the frontend
 
@@ -19,7 +22,6 @@ yarn start (app should come up on localhost:3000)
 ## Running the backend
 
 ```bash
-yarn install
 yarn watch (server should start on localhost:8080)
 ```
 
