@@ -4,10 +4,46 @@ Hello!
 
 This is the take home test that we use to let you showcase your full stack skills. This README will provide some helpful links for you to use as you build out your solution as well as general guidance on what we are looking for.
 
-## Getting Started
+### Terminology and Technical aspect showcase
+- Frontend
+  - React custom hooks
+  - Formik form state handling and Yup schema validation
+  - Mutation handling on sucess and failure to toast popup follow up.
+  - Consuming get vehicles query and add vehicle mutation
+  - Refractor React components
+  - Pagination Mock showcase
+  - css modules
+- Backend
+  - Mutation
+    - add vehicle
+    - update vehicle
+  - Query
+    - get all vehicles
+  - Custom Error handling example
+    - bad user input -> entity already exist
 
-1. First thing you should do is fork interview-take-home repo. Once forked you can commit and push your changes into the forked version of the repo.
-2. Read through the READMEs in both the frontend and backend folders.
+### Mock data display
+![Demo GIF](./showcase/vehicle_table_records.gif)
+
+### Vehicle listing page
+![Demo GIF](./showcase/show_listing_with_pagination.gif)
+
+### Add Existing Vehicle
+![Demo GIF](./showcase/submit_existing_vehicle.gif)
+
+### Add New Vehicle, fetch live updated records
+![Demo GIF](./showcase/add_vehicle_validation_and_fetch_new_update.gif)
+
+### Validation
+![Demo GIF](./showcase/form_validation_and_success_submission.gif)
+
+## Getting Started (pre-requisite)
+In backend directory, create .env file from .env.example and run docker compose up to setup local db.
+
+```bash
+cp .env.example .env
+docker-compose up -d
+```
 
 ## Running the frontend
 
@@ -23,27 +59,12 @@ yarn install
 yarn watch (server should start on localhost:8080)
 ```
 
-## The codebase 
+## The codebase
+Technical components
 
-As you will notice, the codebase is pretty bare bones.
-
-On the frontend: 
-
-It is a NextJS + Typescript repo, utilising ChakraUI as the component and themeing library.
-
-[ChakraUI Docs](https://chakra-ui.com/docs/components)
-[NextJS Docs](https://nextjs.org/docs/getting-started)
-
-There is only one page that the react application is rendering right now and it is the root path `/` found here `src/pages/index.tsx`.
-
-There is a `theme.ts` file in the repo that is part of the chakraUI themeing system. It is what you should use to add new colors and other CSS properties to your theme.
-
-On the backend:
-
-It is a Node + Express + TypeORM repo
-
-[TypeORM Docs](https://typeorm.io/)
-
+- NextJS, Typescript, TypeORM, Express
+- Charka UI, Formik, Yup
+  
 `src/data-source.ts` is where you should define your postgresql credentials
 
 `src/index.ts` is where you should define your API routes

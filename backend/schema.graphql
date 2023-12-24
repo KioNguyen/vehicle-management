@@ -1,0 +1,47 @@
+type Vehicle {
+  id:String!
+  name:String!
+  brand: VehicleEnumType!
+  description:String
+  bodyType: VehicleBodyEnumType!
+  fuelType: VehicleFuelEnumType!
+  price: Int
+}
+type GetVehicles {
+  vehicles: [Vehicle]
+  totalCounts: Int
+}
+
+
+enum VehicleEnumType {
+  Mercedes_Benz
+  BMW
+  Volkswagen
+  Audi
+  Honda
+  Toyota
+}
+
+enum VehicleBodyEnumType {
+  SUV
+  Sedan
+  Hatchback
+  Coupe
+  Convertible
+}
+
+enum VehicleFuelEnumType {
+  Petrol
+  Diesel
+  Hybrid
+  Electric
+}
+
+type Query {
+  getVehicles(limit:Int,offset:Int): GetVehicles
+}
+
+type Mutation {
+    addVehicle(name:String!,brand:VehicleEnumType!,description:String,bodyType:VehicleBodyEnumType!,fuelType:VehicleFuelEnumType!,price:Int): String
+    updateVehicle(id:String!,name:String!,brand:VehicleEnumType!,description:String,bodyType:VehicleBodyEnumType!,fuelType:VehicleFuelEnumType!,price:Int): String
+}

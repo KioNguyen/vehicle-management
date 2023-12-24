@@ -1,0 +1,17 @@
+version: "3.7"
+ 
+services:
+  postgresdb:
+    image: postgres
+    container_name: vincar-postgres-db
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: vincar
+    ports: 
+      - '5432:5432'
+    volumes:
+      - /var/lib/postgresql/data
+volumes:
+  postgresdb:
+

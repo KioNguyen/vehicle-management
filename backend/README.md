@@ -1,10 +1,14 @@
 # Backend
 
 ## Getting Started
-
+    nvm use v18.16.0
 1. Install all dependencies
 2. Replace the credentials in `src/data-source.ts` to your credentials
 
+
+### start the local database
+
+    docker-compose up -d
 
 ## Part 1
 
