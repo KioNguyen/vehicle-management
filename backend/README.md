@@ -6,6 +6,15 @@
 2. Replace the credentials in `src/data-source.ts` to your credentials
 
 
+## Bonus Part
+
+This is a bonus section if you're feeling up to it! 
+
+1. Utilise GraphQL for the endpoints you'll be creating below.
+
+[TypeGraphQL Docs](https://typegraphql.com/docs/getting-started.html)
+[Apollo Server Docs](https://www.apollographql.com/docs/apollo-server/)
+
 ## Part 1
 
 1. Start in `src/entity/Vehicles.ts`, here you will define a class that maps to a database table called `vehicles`.
@@ -38,14 +47,3 @@ You should be able to filter by:
 - Body Type
 - Fuel Type
 - Price Range (E.g Between 20,000 - 100,000)
-
-
-
-## Bonus Part
-
-This is a bonus section if you're feeling up to it! 
-
-1. Convert your backend code to use GraphQL
-
-[TypeGraphQL Docs](https://typegraphql.com/docs/getting-started.html)
-[Apollo Server Docs](https://www.apollographql.com/docs/apollo-server/)
