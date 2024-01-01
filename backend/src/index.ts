@@ -1,12 +1,12 @@
-import { AppDataSource } from "./data-source";
 import * as express from "express";
+import { DBDataSource } from "./database/datasource";
 
-AppDataSource.initialize()
-.then(async () => {
-  const app = express();
+DBDataSource.initialize()
+  .then(async () => {
+    const app = express();
 
-  app.listen(8080, () => {
-    console.log(`Server listening on port ${8080}`);
-  });
-})
-.catch((error) => console.log(error));
+    app.listen(8080, () => {
+      console.log(`Server listening on port ${process.env.PORT}`);
+    });
+  })
+  .catch((error) => console.log(error));
