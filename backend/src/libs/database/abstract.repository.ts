@@ -1,18 +1,18 @@
-import {
-  DeepPartial,
-  InsertResult,
-  ObjectID,
-  ObjectLiteral,
-  Repository,
-  SelectQueryBuilder,
-  UpdateResult,
-} from 'typeorm';
-import _ from 'lodash';
+import _ from "lodash";
 import {
   IPaginationOptions,
   Pagination,
   paginate,
-} from 'nestjs-typeorm-paginate';
+} from "nestjs-typeorm-paginate";
+import {
+  DeepPartial,
+  InsertResult,
+  ObjectId,
+  ObjectLiteral,
+  Repository,
+  SelectQueryBuilder,
+  UpdateResult,
+} from "typeorm";
 
 export interface IRepository<Entity extends ObjectLiteral> {
   findOne(options: DeepPartial<any>): Promise<Entity | null>;
@@ -32,8 +32,8 @@ export interface IRepository<Entity extends ObjectLiteral> {
   insertAll(doc: DeepPartial<Entity>[]): Promise<InsertResult>;
 
   updateMany(
-    where: string | number | Date | ObjectID | DeepPartial<Entity>,
-    set: DeepPartial<Entity>,
+    where: string | number | Date | ObjectId | DeepPartial<Entity>,
+    set: DeepPartial<Entity>
   ): Promise<UpdateResult>;
 }
 
@@ -48,7 +48,7 @@ export class AbstractRepository<Entity extends ObjectLiteral>
 
   async findOne(
     options: DeepPartial<any>,
-    relationsOptions?: string[],
+    relationsOptions?: string[]
   ): Promise<Entity | null> {
     return await this._repository.findOne({
       where: options,
@@ -62,22 +62,22 @@ export class AbstractRepository<Entity extends ObjectLiteral>
 
   async findTheLastItem(
     builder: string,
-    fieldName: string,
+    fieldName: string
   ): Promise<Entity | null> {
     return this._repository
       .createQueryBuilder(builder)
-      .orderBy(fieldName, 'DESC')
+      .orderBy(fieldName, "DESC")
       .getOne();
   }
 
   async findTheLastItemWithDeleted(
     builder: string,
-    fieldName: string,
+    fieldName: string
   ): Promise<Entity | null> {
     return this._repository
       .createQueryBuilder(builder)
       .withDeleted()
-      .orderBy(fieldName, 'DESC')
+      .orderBy(fieldName, "DESC")
       .getOne();
   }
 
@@ -86,7 +86,7 @@ export class AbstractRepository<Entity extends ObjectLiteral>
   }
 
   async findManyWithPagination(
-    options: IPaginationOptions,
+    options: IPaginationOptions
   ): Promise<Pagination<Entity>> {
     return paginate<Entity>(this._repository, options);
   }
@@ -100,8 +100,8 @@ export class AbstractRepository<Entity extends ObjectLiteral>
   }
 
   async updateMany(
-    where: string | number | Date | ObjectID | DeepPartial<Entity>,
-    set: DeepPartial<Entity>,
+    where: string | number | Date | ObjectId | DeepPartial<Entity>,
+    set: DeepPartial<Entity>
   ): Promise<UpdateResult> {
     return await this._repository.update(where, set);
   }
@@ -131,7 +131,7 @@ export class AbstractRepository<Entity extends ObjectLiteral>
   async paginate(
     page = 1,
     limit = 10,
-    queryBuilder?: SelectQueryBuilder<Entity>,
+    queryBuilder?: SelectQueryBuilder<Entity>
   ): Promise<Pagination<Entity>> {
     const [results, totalItems] = queryBuilder
       ? await queryBuilder
