@@ -48,6 +48,15 @@ export enum Brand {
   Volkswagen = 'VOLKSWAGEN',
 }
 
+export type CreateVehicleInput = {
+  bodyType: BodyType;
+  brand: Brand;
+  description?: InputMaybe<Scalars['String']['input']>;
+  fuelType: FuelType;
+  name: Scalars['String']['input'];
+  price: Scalars['Float']['input'];
+};
+
 export enum FuelType {
   Diesel = 'DIESEL',
   Electric = 'ELECTRIC',
@@ -59,6 +68,15 @@ export type GetVehiclesResponse = {
   __typename?: 'GetVehiclesResponse';
   items: Array<Vehicle>;
   pagination: Pagination;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  createVehicle: Vehicle;
+};
+
+export type MutationCreateVehicleArgs = {
+  vehicle: CreateVehicleInput;
 };
 
 export type Pagination = {
@@ -97,6 +115,32 @@ export type Vehicle = {
   updatedAt: Scalars['DateTimeISO']['output'];
 };
 
+export type CreateVehicleMutationVariables = Exact<{
+  name: Scalars['String']['input'];
+  brand: Brand;
+  description?: InputMaybe<Scalars['String']['input']>;
+  bodyType: BodyType;
+  fuelType: FuelType;
+  price: Scalars['Float']['input'];
+}>;
+
+export type CreateVehicleMutation = {
+  __typename?: 'Mutation';
+  createVehicle: {
+    __typename?: 'Vehicle';
+    id: string;
+    name: string;
+    brand: Brand;
+    description: string;
+    bodyType: BodyType;
+    fuelType: FuelType;
+    price: number;
+    createdAt: any;
+    updatedAt: any;
+    deletedAt?: any | null;
+  };
+};
+
 export type GetListVehicleQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -129,6 +173,86 @@ export type GetListVehicleQuery = {
   };
 };
 
+export const CreateVehicleDocument = gql`
+  mutation CreateVehicle(
+    $name: String!
+    $brand: Brand!
+    $description: String
+    $bodyType: BodyType!
+    $fuelType: FuelType!
+    $price: Float!
+  ) {
+    createVehicle(
+      vehicle: {
+        name: $name
+        brand: $brand
+        description: $description
+        bodyType: $bodyType
+        fuelType: $fuelType
+        price: $price
+      }
+    ) {
+      id
+      name
+      brand
+      description
+      bodyType
+      fuelType
+      price
+      createdAt
+      updatedAt
+      deletedAt
+    }
+  }
+`;
+export type CreateVehicleMutationFn = Apollo.MutationFunction<
+  CreateVehicleMutation,
+  CreateVehicleMutationVariables
+>;
+
+/**
+ * __useCreateVehicleMutation__
+ *
+ * To run a mutation, you first call `useCreateVehicleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateVehicleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createVehicleMutation, { data, loading, error }] = useCreateVehicleMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      brand: // value for 'brand'
+ *      description: // value for 'description'
+ *      bodyType: // value for 'bodyType'
+ *      fuelType: // value for 'fuelType'
+ *      price: // value for 'price'
+ *   },
+ * });
+ */
+export function useCreateVehicleMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateVehicleMutation,
+    CreateVehicleMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateVehicleMutation,
+    CreateVehicleMutationVariables
+  >(CreateVehicleDocument, options);
+}
+export type CreateVehicleMutationHookResult = ReturnType<
+  typeof useCreateVehicleMutation
+>;
+export type CreateVehicleMutationResult =
+  Apollo.MutationResult<CreateVehicleMutation>;
+export type CreateVehicleMutationOptions = Apollo.BaseMutationOptions<
+  CreateVehicleMutation,
+  CreateVehicleMutationVariables
+>;
 export const GetListVehicleDocument = gql`
   query GetListVehicle($page: Int, $limit: Int) {
     getListVehicle(pagination: { page: $page, limit: $limit }) {

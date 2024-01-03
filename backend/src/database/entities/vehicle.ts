@@ -17,7 +17,7 @@ export class Vehicle {
   @Column({ type: 'enum', enum: Brand })
   brand: Brand;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
   description: string;
 

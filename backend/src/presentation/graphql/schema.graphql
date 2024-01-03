@@ -23,7 +23,7 @@ enum Brand {
 input CreateVehicleInput {
   bodyType: BodyType!
   brand: Brand!
-  description: String!
+  description: String
   fuelType: FuelType!
   name: String!
   price: Float!
@@ -71,7 +71,7 @@ type Vehicle {
   brand: Brand!
   createdAt: DateTimeISO!
   deletedAt: DateTimeISO
-  description: String!
+  description: String
   fuelType: FuelType!
   id: String!
   name: String!

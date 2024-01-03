@@ -2,6 +2,8 @@ import { BodyType, Brand, FuelType } from "@/api/graphql/generated/schema"
 import RequireStar from "@/components/atoms/require-star"
 import Select from "@/components/atoms/select"
 import { Option } from "@/components/atoms/select/type"
+import useCreateVehicle from "@/hooks/useCreateVehicle"
+import { useApolloClient } from "@apollo/client"
 import { Button, Flex, FormControl, FormErrorMessage, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Textarea, useDisclosure } from "@chakra-ui/react"
 import { useEffect } from "react"
 
@@ -10,9 +12,9 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form"
 type Inputs = {
   name: string
   description: string
-  brand: string
-  bodyType: string
-  fuelType: string
+  brand: Brand
+  bodyType: BodyType
+  fuelType: FuelType
   price: number
 }
 
@@ -25,7 +27,26 @@ export function AddVehicleModal({ open, handleClose }: { open: boolean, handleCl
     reset
   } = useForm<Inputs>()
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+  const client = useApolloClient();
+
+  const { mutate } = useCreateVehicle()
+
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const vehicle = await mutate({
+      name: data.name,
+      description: data.description,
+      brand: data.brand,
+      bodyType: data.bodyType,
+      fuelType: data.fuelType,
+      price: parseFloat(data.price.toString())
+    })
+    console.log("🚀 ~ file: index.tsx:43 ~ constonSubmit:SubmitHandler<Inputs>= ~ vehicle:", vehicle)
+    if (vehicle) {
+      handleOnClose();
+      client.refetchQueries({ include: "active" })
+    }
+
+  }
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   useEffect(() => {
@@ -73,7 +94,7 @@ export function AddVehicleModal({ open, handleClose }: { open: boolean, handleCl
                   rules={{ required: "This field is required." }}
                   render={({ field: { onChange, value } }) => (
                     <FormControl isInvalid={Boolean(errors.brand)}>
-                      <FormLabel>Brand </FormLabel>
+                      <FormLabel>Brand<RequireStar /></FormLabel>
                       <Select dataSource={brandDataSource} onChange={onChange} value={value} placeholder="Select Brand" />
                       {errors.brand && <FormErrorMessage>{errors.brand.message}</FormErrorMessage>}
                     </FormControl>

@@ -9,8 +9,8 @@ export class CreateVehicleInput {
   @Field(() => Brand)
   brand: Brand;
 
-  @Field()
-  description: string;
+  @Field({ nullable: true })
+  description?: string;
 
   @Field(() => BodyType)
   bodyType: BodyType;
