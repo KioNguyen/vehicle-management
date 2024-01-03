@@ -2,20 +2,33 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]?: Maybe<T[SubKey]>;
+};
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
+  [SubKey in K]: Maybe<T[SubKey]>;
+};
+export type MakeEmpty<
+  T extends { [key: string]: unknown },
+  K extends keyof T,
+> = { [_ in K]?: never };
+export type Incremental<T> =
+  | T
+  | {
+      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
+    };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  DateTimeISO: { input: any; output: any; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  DateTimeISO: { input: any; output: any };
 };
 
 export enum BodyType {
@@ -23,7 +36,7 @@ export enum BodyType {
   Coupe = 'COUPE',
   Hatchback = 'HATCHBACK',
   Sedan = 'SEDAN',
-  Suv = 'SUV'
+  Suv = 'SUV',
 }
 
 export enum Brand {
@@ -32,14 +45,14 @@ export enum Brand {
   Honda = 'HONDA',
   MercedesBenz = 'MERCEDES_BENZ',
   Toyota = 'TOYOTA',
-  Volkswagen = 'VOLKSWAGEN'
+  Volkswagen = 'VOLKSWAGEN',
 }
 
 export enum FuelType {
   Diesel = 'DIESEL',
   Electric = 'ELECTRIC',
   Hybrid = 'HYBRID',
-  Petrol = 'PETROL'
+  Petrol = 'PETROL',
 }
 
 export type GetVehiclesResponse = {
@@ -66,7 +79,6 @@ export type Query = {
   getListVehicle: GetVehiclesResponse;
 };
 
-
 export type QueryGetListVehicleArgs = {
   pagination?: InputMaybe<PaginationArgument>;
 };
@@ -90,34 +102,57 @@ export type GetListVehicleQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
-
-export type GetListVehicleQuery = { __typename?: 'Query', getListVehicle: { __typename?: 'GetVehiclesResponse', items: Array<{ __typename?: 'Vehicle', id: string, name: string, brand: Brand, description: string, bodyType: BodyType, fuelType: FuelType, price: number, createdAt: any, updatedAt: any, deletedAt?: any | null }>, pagination: { __typename?: 'Pagination', total: number, page: number, limit: number, totalPage: number } } };
-
+export type GetListVehicleQuery = {
+  __typename?: 'Query';
+  getListVehicle: {
+    __typename?: 'GetVehiclesResponse';
+    items: Array<{
+      __typename?: 'Vehicle';
+      id: string;
+      name: string;
+      brand: Brand;
+      description: string;
+      bodyType: BodyType;
+      fuelType: FuelType;
+      price: number;
+      createdAt: any;
+      updatedAt: any;
+      deletedAt?: any | null;
+    }>;
+    pagination: {
+      __typename?: 'Pagination';
+      total: number;
+      page: number;
+      limit: number;
+      totalPage: number;
+    };
+  };
+};
 
 export const GetListVehicleDocument = gql`
-    query GetListVehicle($page: Int = 1, $limit: Int = 10) {
-  getListVehicle(pagination: {page: $page, limit: $limit}) {
-    items {
-      id
-      name
-      brand
-      description
-      bodyType
-      fuelType
-      price
-      createdAt
-      updatedAt
-      deletedAt
-    }
-    pagination {
-      total
-      page
-      limit
-      totalPage
+  query GetListVehicle($page: Int, $limit: Int) {
+    getListVehicle(pagination: { page: $page, limit: $limit }) {
+      items {
+        id
+        name
+        brand
+        description
+        bodyType
+        fuelType
+        price
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      pagination {
+        total
+        page
+        limit
+        totalPage
+      }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useGetListVehicleQuery__
@@ -136,14 +171,37 @@ export const GetListVehicleDocument = gql`
  *   },
  * });
  */
-export function useGetListVehicleQuery(baseOptions?: Apollo.QueryHookOptions<GetListVehicleQuery, GetListVehicleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetListVehicleQuery, GetListVehicleQueryVariables>(GetListVehicleDocument, options);
-      }
-export function useGetListVehicleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetListVehicleQuery, GetListVehicleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetListVehicleQuery, GetListVehicleQueryVariables>(GetListVehicleDocument, options);
-        }
-export type GetListVehicleQueryHookResult = ReturnType<typeof useGetListVehicleQuery>;
-export type GetListVehicleLazyQueryHookResult = ReturnType<typeof useGetListVehicleLazyQuery>;
-export type GetListVehicleQueryResult = Apollo.QueryResult<GetListVehicleQuery, GetListVehicleQueryVariables>;
+export function useGetListVehicleQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetListVehicleQuery,
+    GetListVehicleQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetListVehicleQuery, GetListVehicleQueryVariables>(
+    GetListVehicleDocument,
+    options,
+  );
+}
+export function useGetListVehicleLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetListVehicleQuery,
+    GetListVehicleQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetListVehicleQuery, GetListVehicleQueryVariables>(
+    GetListVehicleDocument,
+    options,
+  );
+}
+export type GetListVehicleQueryHookResult = ReturnType<
+  typeof useGetListVehicleQuery
+>;
+export type GetListVehicleLazyQueryHookResult = ReturnType<
+  typeof useGetListVehicleLazyQuery
+>;
+export type GetListVehicleQueryResult = Apollo.QueryResult<
+  GetListVehicleQuery,
+  GetListVehicleQueryVariables
+>;

@@ -2,9 +2,11 @@
   margin-bottom: 2rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   list-style-type: none;
   padding: 0 5rem;
+  flex-wrap: nowrap;
+  gap: 10px;
 
   li a {
     border-radius: 7px;

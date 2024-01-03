@@ -2,13 +2,12 @@
 import { useGetListVehicleQuery } from "@/api/graphql/generated/schema";
 import { CoreTable } from "@/components/atoms/table";
 import { VehicleTableData } from "@/types/vehicle/table";
-import { PaginationState, createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { PaginationState, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 import { convertToVehiclesTableData } from "./convertToVehiclesTableData";
 import { useBuildVehicleTableColumn } from "./useBuildVehicleTableColumn";
 
 const VehicleTable = () => {
-
     const columns = useBuildVehicleTableColumn();
     const [{ pageIndex, pageSize }, setPagination] =
         useState<PaginationState>({
@@ -16,18 +15,12 @@ const VehicleTable = () => {
             pageSize: 10,
         });
 
-    const { data, loading } = useGetListVehicleQuery()
-
-    type UnitConversion = {
-        fromUnit: string;
-        toUnit: string;
-        factor: number;
-    };
-
-
-    const columnHelper = createColumnHelper<UnitConversion>();
-
-
+    const { data } = useGetListVehicleQuery({
+        variables: {
+            page: pageIndex,
+            limit: pageSize
+        }
+    })
 
     const dataTable = useMemo<Array<VehicleTableData | null>>(
         () =>
@@ -53,9 +46,10 @@ const VehicleTable = () => {
     });
 
 
-
     return (
-        <CoreTable table={dataTableModel} />
+        <>
+            <CoreTable table={dataTableModel} pageIndex={pageIndex} pageSize={pageSize} totalPage={data?.getListVehicle.pagination.totalPage || 0} />
+        </>
     )
 }
 

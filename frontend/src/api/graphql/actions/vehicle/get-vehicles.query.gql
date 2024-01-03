@@ -1,4 +1,4 @@
-query GetListVehicle ($page: Int = 1, $limit: Int = 10) {
+query GetListVehicle ($page: Int, $limit: Int) {
     getListVehicle(pagination: { page: $page, limit: $limit }) {
         items {
             id
