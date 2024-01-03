@@ -3,7 +3,7 @@ https://github.com/KioNguyen/interview-take-home/assets/35483266/6d16445d-0f50-4
 
 
 
-# Architech:
+# Technical Solution:
 ## Frontend: 
 - NextJS (Page router)
 - Chakra UI
