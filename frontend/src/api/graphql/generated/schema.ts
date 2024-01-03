@@ -64,6 +64,15 @@ export enum FuelType {
   Petrol = 'PETROL',
 }
 
+export type GetVehiclesFilterInput = {
+  bodyType?: InputMaybe<BodyType>;
+  brand?: InputMaybe<Brand>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  fuelType?: InputMaybe<FuelType>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type GetVehiclesResponse = {
   __typename?: 'GetVehiclesResponse';
   items: Array<Vehicle>;
@@ -98,6 +107,7 @@ export type Query = {
 };
 
 export type QueryGetListVehicleArgs = {
+  filter?: InputMaybe<GetVehiclesFilterInput>;
   pagination?: InputMaybe<PaginationArgument>;
 };
 
@@ -107,7 +117,7 @@ export type Vehicle = {
   brand: Brand;
   createdAt: Scalars['DateTimeISO']['output'];
   deletedAt?: Maybe<Scalars['DateTimeISO']['output']>;
-  description: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
   fuelType: FuelType;
   id: Scalars['String']['output'];
   name: Scalars['String']['output'];
@@ -131,7 +141,7 @@ export type CreateVehicleMutation = {
     id: string;
     name: string;
     brand: Brand;
-    description: string;
+    description?: string | null;
     bodyType: BodyType;
     fuelType: FuelType;
     price: number;
@@ -144,6 +154,7 @@ export type CreateVehicleMutation = {
 export type GetListVehicleQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']['input']>;
   limit?: InputMaybe<Scalars['Int']['input']>;
+  filter?: InputMaybe<GetVehiclesFilterInput>;
 }>;
 
 export type GetListVehicleQuery = {
@@ -155,7 +166,7 @@ export type GetListVehicleQuery = {
       id: string;
       name: string;
       brand: Brand;
-      description: string;
+      description?: string | null;
       bodyType: BodyType;
       fuelType: FuelType;
       price: number;
@@ -254,8 +265,15 @@ export type CreateVehicleMutationOptions = Apollo.BaseMutationOptions<
   CreateVehicleMutationVariables
 >;
 export const GetListVehicleDocument = gql`
-  query GetListVehicle($page: Int, $limit: Int) {
-    getListVehicle(pagination: { page: $page, limit: $limit }) {
+  query GetListVehicle(
+    $page: Int
+    $limit: Int
+    $filter: GetVehiclesFilterInput
+  ) {
+    getListVehicle(
+      pagination: { page: $page, limit: $limit }
+      filter: $filter
+    ) {
       items {
         id
         name
@@ -292,6 +310,7 @@ export const GetListVehicleDocument = gql`
  *   variables: {
  *      page: // value for 'page'
  *      limit: // value for 'limit'
+ *      filter: // value for 'filter'
  *   },
  * });
  */

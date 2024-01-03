@@ -41,6 +41,15 @@ enum FuelType {
   PETROL
 }
 
+input GetVehiclesFilterInput {
+  bodyType: BodyType
+  brand: Brand
+  description: String
+  fuelType: FuelType
+  name: String
+  price: Float
+}
+
 type GetVehiclesResponse {
   items: [Vehicle!]!
   pagination: Pagination!
@@ -63,7 +72,7 @@ input PaginationArgument {
 }
 
 type Query {
-  getListVehicle(pagination: PaginationArgument): GetVehiclesResponse!
+  getListVehicle(filter: GetVehiclesFilterInput, pagination: PaginationArgument): GetVehiclesResponse!
 }
 
 type Vehicle {

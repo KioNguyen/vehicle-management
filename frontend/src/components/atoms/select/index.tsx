@@ -6,7 +6,7 @@ const Select = ({ dataSource, placeholder, ...props }: SelectProps) => {
     return (
         <ChakraSelect placeholder={placeholder} {...props}>
             {dataSource.map(option => {
-                return <option value={option.value}>{option.label}</option>
+                return <option key={option.value} value={option.value}>{option.label}</option>
 
             })}
         </ChakraSelect>

@@ -1,3 +1,4 @@
+import { GetVehiclesFilterInput } from 'src/domain/dto/get-vehicles-filter-input.dto';
 import { Inject, Service } from 'typedi';
 import { Vehicle } from '../../../database/entities/vehicle';
 import { IVehicleRepository } from '../../../database/repositories/i-vehicle.repository';
@@ -12,15 +13,13 @@ export class GetVehiclesUsecase {
     private readonly vehicleRepo: IVehicleRepository
   ) {}
 
-  async execute(req: PaginationArgument): Promise<GetVehiclesResponse> {
-    const { limit, page } = req;
+  async execute(req: { pagination: PaginationArgument; filter: GetVehiclesFilterInput }): Promise<GetVehiclesResponse> {
+    const { pagination, filter } = req;
+    console.log('🚀 ~ file: get-vehicles.usecase.ts:18 ~ GetVehiclesUsecase ~ execute ~ filter:', filter);
+    const { page, limit } = pagination;
     let result: Pagination<Vehicle, IPaginationMeta>;
     try {
-      result = await this.vehicleRepo.findManyWithPagination({
-        limit,
-        page
-      });
-
+      result = await this.vehicleRepo.getAllWithPaginationAndFilter(pagination, filter);
       const { items, meta } = result;
 
       return {
