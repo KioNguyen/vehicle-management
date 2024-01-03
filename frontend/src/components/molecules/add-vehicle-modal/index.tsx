@@ -40,7 +40,6 @@ export function AddVehicleModal({ open, handleClose }: { open: boolean, handleCl
       fuelType: data.fuelType,
       price: parseFloat(data.price.toString())
     })
-    console.log("🚀 ~ file: index.tsx:43 ~ constonSubmit:SubmitHandler<Inputs>= ~ vehicle:", vehicle)
     if (vehicle) {
       handleOnClose();
       client.refetchQueries({ include: "active" })
