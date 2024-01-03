@@ -97,8 +97,3 @@ Some things we will be looking for/evaluating when we read your final code submi
 ## How to Submit
 
 1. Throughout your exercise you should be commiting and pushing code often to your repo/branch. This makes it easier for us to review how you break up your building.
-
-2. Once you have your project finalised and are happy with your solution. Open up a Pull Request for your forked repo into the interview-take-home repo and tag the following people as reviewers `ernessttan` and `dre-draws`
-3. Sit back and relax. We will review your submition and will follow up with you to set up a time for us to go through your solution together!
-
-If you have any questions during your take home or are blocked from making progress for any reason please reach out to `ernesttan@vincar.com.sg`.
