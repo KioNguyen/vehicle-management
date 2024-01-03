@@ -1,5 +1,5 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { Table, Tbody, Td, Th, Thead, Tr, chakra } from "@chakra-ui/react";
+import { Box, Table, Tbody, Td, Th, Thead, Tr, chakra } from "@chakra-ui/react";
 import {
     SortingState,
     Table as TableType,
@@ -23,7 +23,6 @@ export function CoreTable<Data extends object>({
 }: CoreTableProps<Data>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const handlePageChange = (event: { selected: number }) => {
-        console.log("🚀 ~ file: index.tsx:26 ~ handlePageChange ~ event:", event)
         table.setPagination({ pageIndex: event.selected + 1, pageSize: pageSize })
     }
     return (
@@ -77,7 +76,9 @@ export function CoreTable<Data extends object>({
                     ))}
                 </Tbody>
             </Table>
-            <PaginatedItems itemsPerPage={pageSize} page={pageIndex} totalPage={totalPage} onPageClick={handlePageChange} />
+            <Box mt="5">
+                <PaginatedItems itemsPerPage={pageSize} page={pageIndex} totalPage={totalPage} onPageClick={handlePageChange} />
+            </Box>
         </>
 
     );
