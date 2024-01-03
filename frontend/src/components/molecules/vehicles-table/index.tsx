@@ -1,8 +1,22 @@
 
+import { useGetListVehicleQuery } from "@/api/graphql/generated/schema";
 import { CoreTable } from "@/components/atoms/table";
-import { createColumnHelper } from "@tanstack/react-table";
+import { VehicleTableData } from "@/types/vehicle/table";
+import { PaginationState, createColumnHelper, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { useMemo, useState } from "react";
+import { convertToVehiclesTableData } from "./convertToVehiclesTableData";
+import { useBuildVehicleTableColumn } from "./useBuildVehicleTableColumn";
 
 const VehicleTable = () => {
+
+    const columns = useBuildVehicleTableColumn();
+    const [{ pageIndex, pageSize }, setPagination] =
+        useState<PaginationState>({
+            pageIndex: 1,
+            pageSize: 10,
+        });
+
+    const { data, loading } = useGetListVehicleQuery()
 
     type UnitConversion = {
         fromUnit: string;
@@ -10,47 +24,38 @@ const VehicleTable = () => {
         factor: number;
     };
 
-    const data: UnitConversion[] = [
-        {
-            fromUnit: "inches",
-            toUnit: "millimetres (mm)",
-            factor: 25.4
-        },
-        {
-            fromUnit: "feet",
-            toUnit: "centimetres (cm)",
-            factor: 30.48
-        },
-        {
-            fromUnit: "yards",
-            toUnit: "metres (m)",
-            factor: 0.91444
-        }
-    ];
 
     const columnHelper = createColumnHelper<UnitConversion>();
 
-    const columns = [
-        columnHelper.accessor("fromUnit", {
-            cell: (info) => info.getValue(),
-            header: "To convert",
-        }),
-        columnHelper.accessor("toUnit", {
-            cell: (info) => info.getValue(),
-            header: "Into"
-        }),
-        columnHelper.accessor("factor", {
-            cell: (info) => info.getValue(),
-            header: "Multiply by",
-            meta: {
-                isNumeric: true,
-                width: "100%",
-            },
 
-        })
-    ];
+
+    const dataTable = useMemo<Array<VehicleTableData | null>>(
+        () =>
+            convertToVehiclesTableData(
+                data?.getListVehicle?.items || [],
+            ),
+        [data],
+    );
+
+    const dataTableModel = useReactTable({
+        data: dataTable,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        onPaginationChange: setPagination,
+        state: {
+            pagination: {
+                pageIndex: pageIndex,
+                pageSize: pageSize,
+            },
+        },
+        pageCount: pageIndex,
+        manualPagination: true,
+    });
+
+
+
     return (
-        <CoreTable data={data} columns={columns} />
+        <CoreTable table={dataTableModel} />
     )
 }
 

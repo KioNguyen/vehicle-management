@@ -1,35 +1,20 @@
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { Table, Tbody, Td, Th, Thead, Tr, chakra } from "@chakra-ui/react";
 import {
-    ColumnDef,
     SortingState,
-    flexRender,
-    getCoreRowModel,
-    getSortedRowModel,
-    useReactTable
+    Table as TableType,
+    flexRender
 } from "@tanstack/react-table";
 import * as React from "react";
 
 export type CoreTableProps<Data extends object> = {
-    data: Data[];
-    columns: ColumnDef<Data, any>[];
+    table: TableType<any>;
 };
 
 export function CoreTable<Data extends object>({
-    data,
-    columns
+    table
 }: CoreTableProps<Data>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
-    const table = useReactTable({
-        columns,
-        data,
-        getCoreRowModel: getCoreRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-        state: {
-            sorting
-        }
-    });
 
     return (
         <Table>
