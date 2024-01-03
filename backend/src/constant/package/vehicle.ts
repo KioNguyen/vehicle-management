@@ -1,0 +1,1 @@
+export const VEHICLE_PACKAGE = "VEHICLE_PACKAGE";

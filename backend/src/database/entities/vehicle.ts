@@ -1,48 +1,53 @@
-import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
-import { BodyType, Brand, FuelType } from "../../constant/vehicel";
+import { Field, ObjectType } from 'type-graphql';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BodyType, Brand, FuelType } from '../../constant/vehicle';
 
-@Entity("vehicles")
+@Entity('vehicles')
+@ObjectType()
 export class Vehicle {
-  @PrimaryGeneratedColumn("uuid")
+  @Field()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
+  @Field()
+  @Column()
   name: string;
 
-  @Column({ type: "enum", enum: Brand })
+  @Field(() => Brand)
+  @Column({ type: 'enum', enum: Brand })
   brand: Brand;
 
+  @Field()
   @Column({ nullable: true })
   description: string;
 
-  @Column({ type: "enum", enum: BodyType })
+  @Field(() => BodyType)
+  @Column({ type: 'enum', enum: BodyType })
   bodyType: BodyType;
 
-  @Column({ type: "enum", enum: FuelType })
+  @Field(() => FuelType)
+  @Column({ type: 'enum', enum: FuelType })
   fuelType: FuelType;
 
-  @Column({ type: "decimal", precision: 10, scale: 2, nullable: true })
+  @Field()
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
   price: number;
 
+  @Field()
   @CreateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)'
   })
   createdAt: Date;
 
+  @Field()
   @UpdateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP(6)",
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)'
   })
   updatedAt: Date;
 
-  @DeleteDateColumn({ type: "timestamp", default: null, nullable: true })
+  @Field({ nullable: true })
+  @DeleteDateColumn({ type: 'timestamp', default: null, nullable: true })
   deletedAt: Date;
 }

@@ -1,15 +1,32 @@
 {
-   "compilerOptions": {
-      "lib": [
-         "es5",
-         "es6"
-      ],
-      "target": "es5",
-      "module": "commonjs",
-      "moduleResolution": "node",
-      "outDir": "./build",
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "sourceMap": true
-   }
-}
+  "compilerOptions": {
+     "lib": [
+        "es5",
+        "es6",
+        "es2020"
+     ],
+     "target": "es2020",
+     "module": "esnext",
+     "moduleResolution": "node",
+     "outDir": "./build",
+     "esModuleInterop": true,
+     "experimentalDecorators": true,
+     "emitDecoratorMetadata": true,
+     "sourceMap": true,
+     "baseUrl": "./",
+     "allowSyntheticDefaultImports": true,
+     "forceConsistentCasingInFileNames": false  /* Disallow inconsistently-cased references to the same file. */
+  },
+  "ts-node": {
+     "compilerOptions": {
+       "module": "commonjs",
+     }
+   },
+  "include": [
+     "src/**/*"
+   ],
+   "exclude": [
+     "node_modules",
+     "dist"
+   ]
+} 
