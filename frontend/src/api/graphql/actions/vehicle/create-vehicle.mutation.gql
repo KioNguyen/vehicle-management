@@ -1,0 +1,31 @@
+
+mutation CreateVehicle (
+  $name: String!
+  $brand: Brand!
+  $description: String
+  $bodyType: BodyType!
+  $fuelType: FuelType!
+  $price: Float!
+) {
+    createVehicle(
+        vehicle: {
+            name: $name
+            brand: $brand
+            description: $description
+            bodyType: $bodyType
+            fuelType: $fuelType
+            price: $price
+        }
+    ) {
+        id
+        name
+        brand
+        description
+        bodyType
+        fuelType
+        price
+        createdAt
+        updatedAt
+        deletedAt
+    }
+}

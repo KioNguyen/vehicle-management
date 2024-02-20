@@ -1,0 +1,23 @@
+query GetListVehicle ($page: Int, $limit: Int, $filter: GetVehiclesFilterInput) {
+    getListVehicle(
+        pagination: { page: $page, limit: $limit }, filter: $filter) {
+        items {
+            id
+            name
+            brand
+            description
+            bodyType
+            fuelType
+            price
+            createdAt
+            updatedAt
+            deletedAt
+        }
+        pagination {
+            total
+            page
+            limit
+            totalPage
+        }
+    }
+}

@@ -1,12 +1,40 @@
-import { AppDataSource } from "./data-source";
-import * as express from "express";
+import { ApolloServer } from '@apollo/server';
+import { startStandaloneServer } from '@apollo/server/standalone';
+import 'reflect-metadata';
+// import joiful from 'joiful';
+import path from 'path';
+import { buildSchema } from 'type-graphql';
+import * as config from './config';
+import Container from './containers';
+import { DBDataSource } from './database/datasource';
+import { QueryResolveTimeMiddleware } from './libs/middlewares/resolve-time.middleware';
+import { VehicleResolver } from './presentation/verhicle.resolver';
 
-AppDataSource.initialize()
-.then(async () => {
-  const app = express();
+config.setup();
+DBDataSource.initialize()
+  .then(async () => {
+    console.log('Postgres TypeORM Database initialized');
+  })
+  .catch(error => console.log(error));
 
-  app.listen(8080, () => {
-    console.log(`Server listening on port ${8080}`);
+const globalMiddlewares = [];
+if (process.env.ENV === 'DEV') {
+  globalMiddlewares.push(QueryResolveTimeMiddleware);
+}
+
+async function bootstrap() {
+  const schema = await buildSchema({
+    resolvers: [VehicleResolver],
+    container: Container,
+    emitSchemaFile: path.resolve(__dirname, './presentation/graphql/schema.graphql'),
+    globalMiddlewares
   });
-})
-.catch((error) => console.log(error));
+
+  const server = new ApolloServer({ schema, formatError: error => error });
+
+  const port = parseInt(process.env.PORT || '4000');
+  const { url } = await startStandaloneServer(server, { listen: { port } });
+  console.log(`GraphQL server ready at ${url}`);
+}
+
+bootstrap().catch(console.error);
